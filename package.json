@@ -1,0 +1,19 @@
+{
+  "name": "littletrek",
+  "version": "0.0.1",
+  "description": "Lightweight zero-dependencies library for routing.",
+  "main": "src/index.js",
+  "types": "types/index.d.ts",
+  "type": "module",
+  "scripts": {
+  },
+  "keywords": [
+    "router", "routing", "route",
+    "littletrek", "little", "trek", "little-trek",
+    "frontend"
+  ],
+  "author": "h41ku <h41ku.c0de@ya.ru>",
+  "license": "MIT",
+  "devDependencies": {
+  }
+}
