@@ -1,8 +1,8 @@
-export type Request = { params: object, query: object, search: string?, hash: string? };
+export type Request = { params: object, query: object, search: string, hash: string };
 export type RequestHandler = (request: Request) => void;
 export type Router = {
     add(pattern: string, handler: RequestHandler): Router,
-    resolve(location: string | URL, origin: string?): void
+    resolve(location: string | URL, origin: string | undefined): void
 };
 export type RouterConnection = {
     disconnect(): void,
