@@ -11,4 +11,4 @@ export type RouterConnection = {
 };
 
 export declare function createRouter(): Router;
-export declare function connectHistoryAPI(router: Router): RouterConnection;
+export declare function bindHistoryAPI(router: Router): RouterConnection;

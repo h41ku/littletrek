@@ -21,7 +21,7 @@ Usage on frontend-side
 ----------------------
 
 ```js
-import { createRouter, connectHistoryAPI } from 'littletrek'
+import { createRouter, bindHistoryAPI } from 'littletrek'
 
 // create router
 const router = createRouter()
@@ -47,8 +47,11 @@ function showUserSessions(req) {
   // omit code ...
 }
 
-// connect history API
-const { disconnect, navigate, back } = connectHistoryAPI(router)
+// bind history API
+const { connect, disconnect, navigate, back } = bindHistoryAPI(router)
+
+// start routing
+connect()
 
 // navigation
 navigate('/user/123/sessions') // internal navigation

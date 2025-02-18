@@ -1,6 +1,6 @@
 {
   "name": "littletrek",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Lightweight zero-dependencies library for routing.",
   "main": "src/index.js",
   "types": "types/index.d.ts",
