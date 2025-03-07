@@ -2,8 +2,7 @@
 
 Lightweight zero-dependencies library for routing.
 
-Installation
-------------
+## Install
 
 NPM:
 
@@ -17,8 +16,7 @@ PNPM:
 pnpm add littletrek
 ```
 
-Usage on frontend-side
-----------------------
+## Usage on frontend-side
 
 ```js
 import { createRouter, bindHistoryAPI } from 'littletrek'
@@ -36,7 +34,7 @@ router
 // handlers
 
 function showUserProfile(request) {
-  const { id } = req.params // request provides parameters
+  const { id } = request.params // request provides parameters
   // now switch page...
   // for example using redux-like approach
   // with thunks and action creators:
@@ -61,8 +59,7 @@ back() // step back
 disconnect() // as needed 
 ```
 
-Route syntax
-------------
+## Route syntax
 
 Route is a string which describes a pattern with a simple syntax.
 
@@ -88,7 +85,6 @@ Examples:
   but will NOT match `/messages/302362`, `/messages/302362/7123332/23132`;
 * `/articles/:slug` will match `/articles/123`, `/articles/how-to-write-a-router`;
 
-License
--------
+## License
 
 MIT
