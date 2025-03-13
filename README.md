@@ -16,34 +16,65 @@ PNPM:
 pnpm add littletrek
 ```
 
-## Usage on frontend-side
+## Usage
+
+### Create an instance of router
 
 ```js
-import { createRouter, bindHistoryAPI } from 'littletrek'
+import { createRouter } from 'littletrek'
 
 // create router
 const router = createRouter()
 
-// setup routes
-
+// setup routes and bind handlers
 router
-  .add('/users/:id', showUserProfile) // bind handler to route
-  .add('/users/:id/sessions', showUserSessions) // bind handler to route
+  .get('/users/:id', showUser) 
+  .patch('/users/:id', updateUser)
+  .delete('/users/:id', deleteUser)
+  .get('/users', listUsers) 
   // etc...
+  // optionally possible to setup a fallback handler
+  .fallback(pageNotFound)
+```
 
-// handlers
+### Using inside a ServiceWorker
 
-function showUserProfile(request) {
-  const { id } = request.params // request provides parameters
-  // now switch page...
-  // for example using redux-like approach
-  // with thunks and action creators:
-  store.dispatch(thunks.loadUserProfileAndShowIt(id))
-}
+```js
+import { createRouter, bindHistoryAPI } from 'littletrek'
 
-function showUserSessions(req) {
-  // omit code ...
-}
+const router = createRouter()
+
+// setup custom route
+router.get('/hello/:name', ({ params: { name } }) => {
+  const body = `Hello, ${name}!`
+  return new Response(body, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8'
+    }
+  })
+})
+
+// fallback handler
+router.fallback(({ request }) => fetch(request)) // get from network
+
+// add event listener
+addEventListener('fetch', evt => evt.respondWith(
+  router.resolve(evt.request)
+))
+
+// ...
+```
+
+### Using History API and frontend-side navigation
+
+History API bindings:
+
+```js
+import { createRouter, bindHistoryAPI } from 'littletrek'
+
+const router = createRouter()
+// omit setup...
 
 // bind history API
 const { connect, disconnect, navigate, back } = bindHistoryAPI(router)
@@ -52,7 +83,7 @@ const { connect, disconnect, navigate, back } = bindHistoryAPI(router)
 connect()
 
 // navigation
-navigate('/user/123/sessions') // internal navigation
+navigate('/user/123') // internal navigation
 back() // step back
 
 // disconnect history API
